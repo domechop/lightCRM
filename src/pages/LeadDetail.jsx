@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { LEAD_SOURCES, formatCurrency } from '../lib/constants'
-import { useNotes } from '../hooks/usenotes'
+import { useNotes } from '../hooks/useNotes'
 
 export default function LeadDetail({ lead, profile, reps, stages, stageColorMap, onBack, onStageChange, onUpdate, onDelete }) {
   const [noteInput, setNoteInput] = useState('')
