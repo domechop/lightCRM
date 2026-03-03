@@ -21,7 +21,7 @@ export default function Login({ signIn, onSignup }) {
         {/* Logo */}
         <div style={{ textAlign: 'center', marginBottom: 40 }}>
           <div style={{ width: 52, height: 52, background: 'linear-gradient(135deg,#f97316,#fb923c)', borderRadius: 14, display: 'inline-flex', alignItems: 'center', justifyContent: 'center', fontSize: 26, marginBottom: 16 }}>💡</div>
-          <div style={{ fontFamily: "'Syne', sans-serif", fontWeight: 800, fontSize: 28, color: '#f1f5f9', letterSpacing: '-0.03em' }}>LumaCRM</div>
+          <div style={{ fontFamily: "'Syne', sans-serif", fontWeight: 800, fontSize: 28, color: '#f1f5f9', letterSpacing: '-0.03em' }}>LuminaTrack</div>
           <div style={{ fontSize: 14, color: '#475569', marginTop: 6 }}>Permanent Lighting Sales Platform</div>
         </div>
 

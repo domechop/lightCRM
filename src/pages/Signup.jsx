@@ -37,7 +37,7 @@ export default function Signup({ signUpAsOwner, signUpAsRep, onBackToLogin }) {
         <div style={{ width: '100%', maxWidth: 420 }}>
           <div style={{ textAlign: 'center', marginBottom: 40 }}>
             <div style={{ width: 52, height: 52, background: 'linear-gradient(135deg,#f97316,#fb923c)', borderRadius: 14, display: 'inline-flex', alignItems: 'center', justifyContent: 'center', fontSize: 26, marginBottom: 16 }}>💡</div>
-            <div style={{ fontFamily: "'Syne', sans-serif", fontWeight: 800, fontSize: 28, color: '#f1f5f9', letterSpacing: '-0.03em' }}>LumaCRM</div>
+            <div style={{ fontFamily: "'Syne', sans-serif", fontWeight: 800, fontSize: 28, color: '#f1f5f9', letterSpacing: '-0.03em' }}>LuminaTrack</div>
             <div style={{ fontSize: 14, color: '#475569', marginTop: 6 }}>Get started</div>
           </div>
 
@@ -50,7 +50,7 @@ export default function Signup({ signUpAsOwner, signUpAsRep, onBackToLogin }) {
               onMouseLeave={e => e.currentTarget.style.borderColor = '#1e293b'}>
               <div style={{ fontSize: 24, marginBottom: 8 }}>🏢</div>
               <div style={{ fontWeight: 700, color: '#f1f5f9', fontSize: 15, marginBottom: 4 }}>Create a new organization</div>
-              <div style={{ fontSize: 13, color: '#64748b' }}>I'm an owner setting up LumaCRM for my company</div>
+              <div style={{ fontSize: 13, color: '#64748b' }}>I'm an owner setting up LuminaTrack for my company</div>
             </button>
 
             <button onClick={() => setMode('join')} style={{
