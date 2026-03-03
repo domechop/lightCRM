@@ -11,6 +11,7 @@ import LeadDetail from './pages/LeadDetail'
 import StagesSettings from './pages/StagesSettings'
 import StatBar from './components/StatBar'
 import AddLeadModal from './components/AddLeadModal'
+import CalendarPage from './pages/CalendarPage'
 
 const MOBILE_STYLES = `
   @media (max-width: 767px) {
@@ -119,8 +120,9 @@ export default function App() {
           <div className="header-nav" style={{ display: 'flex', gap: 4 }}>
             <button className={`nav-tab ${view === 'pipeline' ? 'active' : ''}`} onClick={() => goTo('pipeline')}>Pipeline</button>
             <button className={`nav-tab ${view === 'list' ? 'active' : ''}`} onClick={() => goTo('list')}>All Leads</button>
+            <button className={`nav-tab ${view === 'calendar' ? 'active' : ''}`} onClick={() => goTo('calendar')}>Calendar</button>
             {isManager && (
-              <button className={`nav-tab ${view === 'stages' ? 'active' : ''}`} onClick={() => goTo('stages')}>⚙ Stages</button>
+              <button className={`nav-tab ${view === 'stages' ? 'active' : ''}`} onClick={() => goTo('stages')}>Stages</button>
             )}
           </div>
 
@@ -162,7 +164,13 @@ export default function App() {
           ) : (
             <>
               {view === 'pipeline' && (
-                <Pipeline leads={filtered} stages={stages} stageColorMap={stageColorMap} onLeadClick={openLead} />
+                <Pipeline
+                  leads={filtered}
+                  stages={stages}
+                  stageColorMap={stageColorMap}
+                  onLeadClick={openLead}
+                  onStageChange={handleStageChange}
+                />
               )}
               {view === 'list' && (
                 <LeadList leads={filtered} stageColorMap={stageColorMap} onLeadClick={openLead} />
@@ -191,6 +199,9 @@ export default function App() {
                   onBack={() => goTo('pipeline')}
                 />
               )}
+              {view === 'calendar' && (
+              <CalendarPage leads={filtered} stageColorMap={stageColorMap} onLeadClick={openLead} />
+            )}
             </>
           )}
         </div>

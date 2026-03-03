@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import { Phone, Mail, Tag, User, Calendar, Clock, ArrowLeft, Pencil, Trash2, Ruler, ShieldCheck } from 'lucide-react'
 import { LEAD_SOURCES, formatCurrency } from '../lib/constants'
 import { useNotes } from '../hooks/useNotes'
 
@@ -12,6 +13,19 @@ const InfoRow = ({ icon: Icon, children }) => (
     {children}
   </div>
 )
+
+function addToGoogleCalendar(lead) {
+  const title = encodeURIComponent(`Install: ${lead.name}`)
+  const details = encodeURIComponent(`Address: ${lead.address || ''}\nValue: ${formatCurrency(lead.value)}\nLinear Footage: ${lead.linear_footage ? lead.linear_footage + ' ft' : '—'}`)
+  const location = encodeURIComponent(lead.address || '')
+
+  // Format date as YYYYMMDD for all-day event
+  const date = lead.install_date?.replace(/-/g, '') || ''
+  const dates = date ? `${date}/${date}` : ''
+
+  const url = `https://calendar.google.com/calendar/render?action=TEMPLATE&text=${title}&details=${details}&location=${location}${dates ? `&dates=${dates}` : ''}`
+  window.open(url, '_blank')
+}
 
 export default function LeadDetail({ lead, profile, reps, stages, stageColorMap, onBack, onStageChange, onUpdate, onDelete }) {
   const [noteInput, setNoteInput] = useState('')
@@ -79,7 +93,6 @@ export default function LeadDetail({ lead, profile, reps, stages, stageColorMap,
     onBack()
   }
 
-  // Warranty warning — highlight if expiring within 30 days
   const warrantyColor = (() => {
     if (!lead.warranty_expires) return '#9ca3af'
     const days = (new Date(lead.warranty_expires) - new Date()) / (1000 * 60 * 60 * 24)
@@ -105,11 +118,11 @@ export default function LeadDetail({ lead, profile, reps, stages, stageColorMap,
       {/* Header */}
       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: 24 }}>
         <div>
-          <h1 style={{ fontFamily: "'Syne', sans-serif", fontSize: 26, fontWeight: 800, color: '#f1f5f9', marginBottom: 6, letterSpacing: '-0.02em' }}>{lead.name}</h1>
+          <h1 style={{ fontFamily: "'Inter', sans-serif", fontSize: 26, fontWeight: 800, color: '#f1f5f9', marginBottom: 6, letterSpacing: '-0.02em' }}>{lead.name}</h1>
           {lead.address && <div style={{ fontSize: 14, color: '#64748b' }}>{lead.address}</div>}
         </div>
         <div style={{ textAlign: 'right' }}>
-          <div style={{ fontSize: 26, fontWeight: 700, color: '#10b981', fontFamily: "'Syne', sans-serif" }}>{formatCurrency(lead.value)}</div>
+          <div style={{ fontSize: 26, fontWeight: 700, color: '#10b981', fontFamily: "'Inter', sans-serif" }}>{formatCurrency(lead.value)}</div>
           <span className="stage-badge" style={{ background: (stageColorMap[lead.stage] || '#6b7280') + '22', color: stageColorMap[lead.stage] || '#6b7280', marginTop: 4 }}>{lead.stage}</span>
         </div>
       </div>
@@ -120,7 +133,6 @@ export default function LeadDetail({ lead, profile, reps, stages, stageColorMap,
           <div style={{ fontSize: 11, color: '#f97316', fontWeight: 600, textTransform: 'uppercase', letterSpacing: '0.06em', marginBottom: 16 }}>Editing Lead</div>
           <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 12 }}>
 
-            {/* Basic fields */}
             {[['name','Customer Name'], ['address','Address'], ['phone','Phone'], ['email','Email']].map(([k, label]) => (
               <div key={k} style={{ gridColumn: k === 'address' ? 'span 2' : 'span 1' }}>
                 <Label>{label}</Label>
@@ -145,7 +157,6 @@ export default function LeadDetail({ lead, profile, reps, stages, stageColorMap,
               </select>
             </div>
 
-            {/* Divider */}
             <div style={{ gridColumn: 'span 2', borderTop: '1px solid #1e293b', margin: '4px 0' }} />
             <div style={{ gridColumn: 'span 2', fontSize: 11, color: '#f97316', fontWeight: 600, textTransform: 'uppercase', letterSpacing: '0.06em' }}>Install Details</div>
 
@@ -188,13 +199,25 @@ export default function LeadDetail({ lead, profile, reps, stages, stageColorMap,
 
           {/* Install Details */}
           <div className="card" style={{ padding: 18, gridColumn: 'span 2' }}>
-            <Label>Install Details</Label>
+            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 12 }}>
+              <Label>Install Details</Label>
+              {lead.install_date && (
+                <button
+                  onClick={() => addToGoogleCalendar(lead)}
+                  style={{ display: 'flex', alignItems: 'center', gap: 6, background: '#1e293b', border: '1px solid #334155', borderRadius: 8, padding: '5px 12px', cursor: 'pointer', fontSize: 12, color: '#94a3b8', fontFamily: 'inherit', transition: 'all 0.15s' }}
+                  onMouseEnter={e => { e.currentTarget.style.borderColor = '#4285f4'; e.currentTarget.style.color = '#4285f4' }}
+                  onMouseLeave={e => { e.currentTarget.style.borderColor = '#334155'; e.currentTarget.style.color = '#94a3b8' }}
+                >
+                  <span style={{ fontSize: 14 }}>📅</span> Add to Google Calendar
+                </button>
+              )}
+            </div>
             <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr', gap: 16 }}>
               <div>
                 <div style={{ fontSize: 11, color: '#475569', marginBottom: 4, display: 'flex', alignItems: 'center', gap: 5 }}>
                   <Ruler size={11} color='#475569' /> Linear Footage
                 </div>
-                <div style={{ fontSize: 20, fontWeight: 700, color: lead.linear_footage ? '#f1f5f9' : '#334155', fontFamily: "'Syne', sans-serif" }}>
+                <div style={{ fontSize: 20, fontWeight: 700, color: lead.linear_footage ? '#f1f5f9' : '#334155', fontFamily: "'Inter', sans-serif" }}>
                   {lead.linear_footage ? `${lead.linear_footage} ft` : '—'}
                 </div>
               </div>
