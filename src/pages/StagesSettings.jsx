@@ -1,5 +1,4 @@
 import { useState } from 'react'
-import { ArrowLeft, ArrowUp, ArrowDown, Trash2, Pencil } from 'lucide-react'
 
 const PRESET_COLORS = [
   '#6b7280','#3b82f6','#8b5cf6','#f59e0b',
