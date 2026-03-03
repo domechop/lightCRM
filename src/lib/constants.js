@@ -15,9 +15,9 @@ export const LEAD_SOURCES = ["Referral", "Door-to-door", "Facebook Ad", "Website
 export const formatCurrency = (n) => "$" + (n || 0).toLocaleString()
 
 export const GLOBAL_STYLES = `
-  @import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600;700&family=Syne:wght@600;700;800&display=swap');
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-  body { background: #080d18; color: #e2e8f0; font-family: 'DM Sans', sans-serif; }
+  body { background: #080d18; color: #e2e8f0; font-family: 'Inter', sans-serif; }
   ::-webkit-scrollbar { width: 6px; height: 6px; }
   ::-webkit-scrollbar-track { background: #0f1624; }
   ::-webkit-scrollbar-thumb { background: #2d3748; border-radius: 3px; }

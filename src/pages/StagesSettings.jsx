@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import { ArrowLeft, ArrowUp, ArrowDown, Trash2, Pencil } from 'lucide-react'
 
 const PRESET_COLORS = [
   '#6b7280','#3b82f6','#8b5cf6','#f59e0b',
@@ -70,7 +71,7 @@ export default function StagesSettings({ stages, profile, onAdd, onUpdate, onDel
   return (
     <div style={{ padding: 24, maxWidth: 600, margin: '0 auto' }} className="fade-in">
       <div style={{ display: 'flex', alignItems: 'center', gap: 14, marginBottom: 28 }}>
-        <button className="btn btn-ghost" onClick={onBack}>← Back</button>
+        <button className="btn btn-ghost" onClick={onBack}></button>
         <div>
           <h1 style={{ fontFamily: "'Syne', sans-serif", fontSize: 22, fontWeight: 800, color: '#f1f5f9' }}>Pipeline Stages</h1>
           <div style={{ fontSize: 13, color: '#64748b', marginTop: 2 }}>Customize your sales pipeline stages</div>
@@ -102,10 +103,8 @@ export default function StagesSettings({ stages, profile, onAdd, onUpdate, onDel
                 {/* Reorder buttons */}
                 {canEdit && (
                   <div style={{ display: 'flex', flexDirection: 'column', gap: 2 }}>
-                    <button onClick={() => move(i, -1)} disabled={i === 0}
-                      style={{ background: 'none', border: 'none', cursor: i === 0 ? 'default' : 'pointer', color: i === 0 ? '#1e293b' : '#475569', fontSize: 10, lineHeight: 1, padding: '1px 3px' }}>▲</button>
-                    <button onClick={() => move(i, 1)} disabled={i === stages.length - 1}
-                      style={{ background: 'none', border: 'none', cursor: i === stages.length - 1 ? 'default' : 'pointer', color: i === stages.length - 1 ? '#1e293b' : '#475569', fontSize: 10, lineHeight: 1, padding: '1px 3px' }}>▼</button>
+                    <button onClick={() => move(i, -1)} disabled={i === 0} style={{ background: 'none', border: 'none', cursor: i === 0 ? 'default' : 'pointer', color: i === 0 ? '#1e293b' : '#475569', padding: '1px 3px', display:'flex' }}><ArrowUp size={11}/></button>
+                    <button onClick={() => move(i, 1)} disabled={i === stages.length - 1} style={{ background: 'none', border: 'none', cursor: i === stages.length - 1 ? 'default' : 'pointer', color: i === stages.length - 1 ? '#1e293b' : '#475569', padding: '1px 3px', display:'flex' }}><ArrowDown size={11}/></button>
                   </div>
                 )}
                 {/* Color dot */}
@@ -118,7 +117,7 @@ export default function StagesSettings({ stages, profile, onAdd, onUpdate, onDel
                 {canEdit && (
                   <div style={{ display: 'flex', gap: 6 }}>
                     <button className="btn btn-ghost" style={{ fontSize: 12, padding: '5px 10px' }} onClick={() => startEdit(stage)}>Edit</button>
-                    <button className="btn btn-danger" style={{ fontSize: 12, padding: '5px 10px' }} onClick={() => handleDelete(stage.id, stage.name)}>✕</button>
+                    <button className="btn btn-danger" style={{ fontSize: 12, padding: '5px 8px', display:'flex', alignItems:'center' }} onClick={() => handleDelete(stage.id, stage.name)}><Trash2 size={13}/></button>
                   </div>
                 )}
               </div>

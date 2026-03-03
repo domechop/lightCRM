@@ -1,8 +1,9 @@
 import { formatCurrency } from '../lib/constants'
 
-export default function StatBar({ leads }) {
-  const pipeline = leads.filter(l => !['Installed'].includes(l.stage)).reduce((a, b) => a + (b.value || 0), 0)
-  const closed = leads.filter(l => ['Sold', 'Installed'].includes(l.stage)).reduce((a, b) => a + (b.value || 0), 0)
+export default function StatBar({ leads, stages }) {
+  const lastStage = stages[stages.length - 1]?.name
+  const pipeline = leads.filter(l => l.stage !== lastStage).reduce((a, b) => a + (b.value || 0), 0)
+  const closed = leads.filter(l => l.stage === lastStage).reduce((a, b) => a + (b.value || 0), 0)
   const avg = leads.length ? Math.round(leads.reduce((a, b) => a + (b.value || 0), 0) / leads.length) : 0
   const needFollowUp = leads.filter(l => ['Follow-Up', 'Quoted'].includes(l.stage)).length
 
@@ -21,7 +22,7 @@ export default function StatBar({ leads }) {
           <span style={{ fontSize: 16 }}>{s.icon}</span>
           <div>
             <div style={{ fontSize: 10, color: '#64748b', fontWeight: 600, textTransform: 'uppercase', letterSpacing: '0.05em', whiteSpace: 'nowrap' }}>{s.label}</div>
-            <div style={{ fontSize: 16, fontWeight: 700, color: s.accent ? '#f97316' : s.warn ? '#fbbf24' : '#f1f5f9', fontFamily: "'Syne', sans-serif" }}>{s.value}</div>
+            <div style={{ fontSize: 16, fontWeight: 700, color: s.accent ? '#f97316' : s.warn ? '#fbbf24' : '#f1f5f9', fontFamily: "'Inter', sans-serif" }}>{s.value}</div>
           </div>
         </div>
       ))}

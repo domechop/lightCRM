@@ -151,7 +151,7 @@ export default function App() {
         </div>
 
         {/* Stats */}
-        <StatBar leads={filtered} />
+        <StatBar leads={filtered} stages={stages} />
 
         {/* Main content */}
         <div className="main-content" style={{ flex: 1, overflow: 'auto' }}>
