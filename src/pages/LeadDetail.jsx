@@ -1,5 +1,4 @@
 import { useState } from 'react'
-import { Phone, Mail, Tag, User, Calendar, Clock, ArrowLeft, Pencil, Trash2, Ruler, ShieldCheck } from 'lucide-react'
 import { LEAD_SOURCES, formatCurrency } from '../lib/constants'
 import { useNotes } from '../hooks/useNotes'
 
